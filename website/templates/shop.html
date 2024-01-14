@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+{% block title %} Shopping page {% endblock %}
+{% block content %}
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">E-commerce Store</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Shop</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">Cart</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Shop Page -->
+<form method="POST">
+  <ul class="list-group">
+<div class="container my-5">
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="card" style>
+        <img src="../static/images/e--comeerce.png" class="card-img-top" alt="Product 1">
+        <div class="card-body">
+          <h5 class="card-title" style="color: black;" id="data">Product 1</h5>
+          <p class="card-text" style="color: black;" id="price" >$29.99</p>
+          <button class="btn btn-primary" onclick="addToCart('Product 1', 19.99)" type="submit">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="card" style>
+        <img src="../static/images/e--comeerce.png" class="card-img-top" alt="Product 1">
+        <div class="card-body">
+          <h5 class="card-title" style="color: black;" id="data1">Product 1</h5>
+          <p class="card-text" style="color: black;" id="price2">$54.99</p>
+          <button class="btn btn-primary" onclick="addToCart('Product 1', 19.99)" type="submit">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="card" style>
+        <img src="../static/images/e--comeerce.png" class="card-img-top" alt="Product 1">
+        <div class="card-body">
+          <h5 class="card-title" style="color: black;" id="data3">Product 1</h5>
+          <p class="card-text" style="color: black;" id="price3">87.99</p>
+          <button class="btn btn-primary" onclick="addToCart('Product 1', 19.99)" type="submit">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="card" style>
+        <img src="../static/images/e--comeerce.png" class="card-img-top" alt="Product 1">
+        <div class="card-body">
+          <h5 class="card-title" style="color: black;">Product 1</h5>
+          <p class="card-text" style="color: black;">$23.99</p>
+          <button class="btn btn-primary" onclick="addToCart('Product 1', 19.99)" type="submit">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3" style="margin-top: 30px;">
+      <div class="card" style>
+        <img src="../static/images/e--comeerce.png" class="card-img-top" alt="Product 1">
+        <div class="card-body">
+          <h5 class="card-title" style="color: black;">Product 1</h5>
+          <p class="card-text" style="color: black;">$38.99</p>
+          <button class="btn btn-primary" onclick="addToCart('Product 1', 19.99)" type="submit">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3" style="margin-top: 30px;">
+      <div class="card" style>
+        <img src="../static/images/e--comeerce.png" class="card-img-top" alt="Product 1">
+        <div class="card-body">
+          <h5 class="card-title" style="color: black;">Product 1</h5>
+          <p class="card-text" style="color: black;">$64.99</p>
+          <button class="btn btn-primary" onclick="addToCart('Product 1', 19.99)" type="submit">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add more products here -->
+
+  </div>
+</div>
+  </ul>
+</form>
+<!-- Cart Modal -->
+
+<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cartModalLabel" style="color: black;">Shopping Cart</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Price</th>
+            </tr>
+          </thead>
+          <tbody id="cartBody">
+            <!-- Cart items will be dynamically added here -->
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer" style="color:black;">
+        <p>Total: <span id="cartTotal">$0.00</span></p>
+        <button type="button" class="btn btn-primary" onclick="buyCart()">Buy Cart</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Update the updateCartModal function in your HTML file -->
+<script>
+  // Cart data
+  const cart = [];
+
+  // Function to add items to the cart
+  function addToCart(product, price) {
+    cart.push({ product, price });
+    updateCartModal();
+  }
+
+  // Function to update the cart modal
+  function updateCartModal() {
+    const cartBody = document.getElementById('cartBody');
+    const totalDisplay = document.getElementById('cartTotal');
+    cartBody.innerHTML = '';
+
+    let totalPrice = 0;
+
+    cart.forEach(item => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${item.product}</td>
+        <td>$${item.price.toFixed(2)}</td>
+      `;
+      cartBody.appendChild(row);
+      totalPrice += item.price;
+    });
+
+    // Display total price
+    totalDisplay.innerText = `$${totalPrice.toFixed(2)}`;
+  }
+  function buyCart() {
+    // You can customize this window/modal as needed
+    const credentialsWindow = window.open('', 'Credentials', 'width=400,height=300');
+
+    // Add HTML content to the small window
+    credentialsWindow.document.write(`
+      <html>
+      <head>
+        <title>Enter Credentials</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            text-align: center;
+          }
+
+          h2 {
+            color: #333;
+          }
+
+          form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+
+          label {
+            margin-bottom: 8px;
+            color: #555;
+          }
+
+          input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+          }
+
+          button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+          }
+        </style>
+      </head>
+      <body>
+        <img src="path/to/your/logo.png" alt="Logo" style="width: 100px; height: 100px; margin-bottom: 20px;">
+        <h2>Enter Your Credentials</h2>
+        <form>
+          <!-- Add your credential fields here -->
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required><br><br>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required><br><br>
+          <button type="button" onclick="processOrder()">Process Order</button>
+        </form>
+      </body>
+      </html>
+    `);
+  }
+  // Function to process the order after entering credentials
+  function processOrder() {
+    // Add your logic here to process the order
+    alert('Order Processed Successfully!');
+  }
+</script>
+
+
+</body>
+{% endblock %}

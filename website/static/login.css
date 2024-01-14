@@ -1,0 +1,37 @@
+
+   
+
+        .container {
+             /* Black with 50% transparency */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: white; /* Text color */
+        }
+
+        #logo {
+            max-width: 100px;
+            max-height: 100px;
+            margin-bottom: 20px;
+            border-radius: 50%;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #555;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }

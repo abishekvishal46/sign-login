@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %} Login{% endblock %}
+{% block content %}
+
+
+
+
+<body style="background: url('./static/images/bat.jpg') no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+
+    <div class="container" style=" width:350px;" >
+        <img id="logo" src="./static/images/logo.jpg" alt="Logo">
+        <h2>Login</h2>
+        <form method="POST">
+            <input type="email" placeholder="Enter Email" name="email" required>
+            <input type="password" placeholder="Password" name="password" required>
+            <button type="submit">Login</button>
+            
+        </form>
+    </div>
+
+</body>
+</center>
+{% endblock %}
